@@ -269,9 +269,207 @@
 
 // console.log(result1, result2, result3, result4);
 
-var Obj = {
-	prop1: 1,
-	prop2: 2,
-	prop3: 3
+// var Obj = {
+	// prop1: 1,
+	// prop2: 2,
+	// prop3: 3
+// }
+// document.write("toString em 'obj' é enumerável? "+Obj.propertyIsEnumerable("toString")+"<br />");
+// document.write("Mas existe o 'toString' em 'Obj'?"+("toString" in Obj)+"<br>");
+// 
+// // Iterando no objeto 'obj' e exibindo os nomes das propriedades
+// document.write("Nomes das propriedades enumeraveis do objeto 'obj':<br> ");
+// for(prop in Obj){
+	// document.write(prop + "<br>");
+// }
+// 
+// // usando Object.key()
+// 
+// document.write("Nomes das propriedades enumeradas do objeto 'obj são: <br>"+ Object.keys(Obj));
+// document.write("<br><br> Nomes das propriedades enumeradas do objeto 'obj são: <br>"+ Object.getOwnPropertyNames(Obj));
+
+
+// Criando um objeto com métodos getter e setter
+/*var obj = {
+    // 'prop_1' e 'prop_1' são propriedades de leitura-gravação normais
+    prop_1:5,
+    prop_2:7,
+
+    // 'prop_3' é propriedade de acesso de leitura-gravação com métodos
+    // getter e setter. Lembre-se de colocar a vírgula após os
+    // métodos de acesso
+    get prop_3(){
+        return(this.prop_1+this.prop_2);
+    },
+    set prop_3(valor){
+        this.prop_1 *= valor;
+        this.prop_2 *= valor;
+    }
+};
+
+// Exibindo o valor de 'prop_1' e 'prop_2'.
+document.write("O valor de 'prop_1' é: "+obj.prop_1+"<br />");
+document.write("E de 'prop_2' agora é: "+obj.prop_2+"<br /><br />");
+
+// Agora veja os métodos de acesso em prática
+// O que acontece ao mandar exibir o valor de 'prop_3'?
+// Descubra abaixo:
+document.write("O retorno para 'obj.prop_3' é: "+obj.prop_3+"<br /><br />");
+
+// Ele exibe a soma de 'prop_1' + 'prop_2'.
+// Mas, e ao tentar modificar 'prop_3', passando o valor 5?
+// Abaixo, você terá o resultado:
+document.write("O retorno para 'obj.prop_3 = 5' é: "+(obj.prop_3 = 5)+"<br /><br />");
+
+// Como assim? Nada aconteceu? Lembre-se, o método getter recupera o valor e o
+// método setter grava o valor. Na função que foi criado o método setter, tem como
+// função a modificação das propriedades 'prop_1' e 'prop_2' multiplicando-as
+// pelo valor informado. Então, ao exibir o valor de 'prop_1' e 'prop_2' se obtém:
+document.write("O valor de 'prop_1' agora é: "+obj.prop_1+"<br />");
+document.write("E de 'prop_2' agora é: "+obj.prop_2);
+*/
+
+// Criando um objeto
+// var obj = {
+    // prop_1:5,
+    // prop_2:7,
+    // get prop_3(){
+        // return(this.prop_1+this.prop_2);
+    // },
+    // set prop_3(valor){
+        // this.prop_1 *= valor;
+        // this.prop_2 *= valor;
+    // }
+// };
+// 
+// // Exibindo o objeto descritor de propriedades da propriedade 'prop_1';
+// document.write("O retorno para 'Object.getOwnPropertyDescriptor(obj,\"prop_1\") é: <br />");
+// 
+// var obj_descritor = Object.getOwnPropertyDescriptor(obj,"prop_1");
+// for(tw in obj_descritor){
+    // document.write("<strong>"+tw+"</strong>: "+obj_descritor[tw]+"<br />");
+// }
+// 
+// document.write("<br /><br />");
+// 
+// // Exibindo o objeto descritor de propriedades da propriedade 'prop_3';
+// document.write("O retorno para 'Object.getOwnPropertyDescriptor(obj,\"prop_3\") é: <br />");
+// 
+// var obj_descritor = Object.getOwnPropertyDescriptor(obj,"prop_3");
+// for(tw in obj_descritor){
+    // document.write("<strong>"+tw+"</strong>: "+obj_descritor[tw]+"<br />");
+// }
+// Criando um objeto literal
+// var obj_literal = {
+    // nome: "José",
+    // sobrenome: "Silta"
+// };
+// 
+// // Criando um objeto utilizando Object.create e tendo
+// // 'obj_literal' como protótipo.
+// var obj = Object.create(obj_literal);
+// 
+// // Será que 'obj_literal' é protótipo de 'obj'?
+// document.write("O retorno para 'obj_literal.isPrototypeOf(obj)' é: ");
+// document.write(obj_literal.isPrototypeOf(obj)+"<br /><br />");
+// 
+// // Será que Object.prototype é protótipo de 'obj'?
+// document.write("O retorno para 'Object.prototype.isPrototypeOf(obj)' é: ");
+// document.write(Object.prototype.isPrototypeOf(obj));
+// // 'obj' herda 'Object.prototype' de 'obj_literal'
+
+
+// Este exemplo retorna a classe de qualquer objeto passada a ela
+function qualClasse(valor){
+    // Se, e somente se, o valor enviado for igual a 'null', retorna 'Null'
+    if(valor === null) return "Null";
+    // Se, e somente se, o valor enviado for igual a 'undefined', retorna 'Undefined'
+    if(valor === undefined) return "Undefined";
+    // Caso contrário ele retorna o atributo classe
+    return Object.prototype.toString.call(valor).slice(8,-1);
 }
-document.write("toString em 'Obj' é enumeravel? ".Obj.propertyIsEnumerable("toSreing");
+
+// // Aqui, será exibido o resultado da chamada função 'qualClasse()'
+// // para alguns exemplos:
+// document.write("Qual o atributo classe de 'null': <strong>"+qualClasse(null)+"</strong><br />");
+// document.write("Qual o atributo classe de '1': <strong>"+qualClasse(1)+"</strong><br />");
+// document.write("Qual o atributo classe de '\"\"': <strong>"+qualClasse("")+"</strong><br />");
+// document.write("Qual o atributo classe de 'false': <strong>"+qualClasse(false)+"</strong><br />");
+// document.write("Qual o atributo classe de '{}': <strong>"+qualClasse({})+"</strong><br />");
+// document.write("Qual o atributo classe de '[]': <strong>"+qualClasse([])+"</strong><br />");
+// document.write("Qual o atributo classe de '/./': <strong>"+qualClasse(/./)+"</strong><br />");
+// document.write("Qual o atributo classe de 'new Date()': <strong>"+qualClasse(new Date())+"</strong><br />");
+// document.write("Qual o atributo classe de 'window': <strong>"+qualClasse(window)+"</strong><br />");
+
+// var Obj_prototipo = {
+	// prop1 : 1,
+	// prop1 : 2
+// };
+// var obj = Object.create(Obj_prototipo);
+// obj.pro3 = 3;
+// 
+// document.write("'obj' é um objeto extensível? ");
+// document.write("<strong>"+Object.isExtensible(obj)+"</strong>");
+// 
+// 
+// 
+// // Tornando o objeto 'obj' não extensível
+// Object.preventExtensions(obj);
+// 
+// // Verificando novamente se o objeto 'obj' é extensível
+// document.write("Agora o 'obj' é um objeto extensível? ");
+// document.write("<strong>"+Object.isExtensible(obj)+"</strong><br />");
+// 
+// // O que ocorre se eu tentar configurar uma propriedade para obj?
+// obj.prop_4 = "teste";
+// 
+// // Nenhum erro é informado, mas será que a propriedade foi configurada
+// // para o objeto 'obj'?
+// document.write("As propriedades do objeto 'obj' são: ");
+// document.write("<strong>"+Object.keys(obj)+"</strong><br />");
+// 
+// // Eu não posso configurar uma propriedade no objeto 'obj', mas posso
+// // criar tal propriedade no seu protótipo e acessá-la de 'obj'
+// obj_prototipo.prop_4 = "teste";
+// document.write("O retorno para 'obj.prop_4' é: ");
+// document.write("<strong>"+obj.prop_4+"</strong><br />");
+// 
+// // Será que eu consigo modificar o valor das propriedades do objeto 'obj'?
+// obj.prop_3 = "Consegui configurar!";
+// document.write("O retorno para 'obj.prop_3' é: ");
+// document.write("<strong>"+obj.prop_3+"</strong><br />");
+
+
+// Criando um objeto
+// var obj = {
+    // nome:"Paulo",
+    // sobrenome:"Santos"
+// };
+// 
+// // Utilizando o método toLocaleString() em um objeto comum
+// document.write("O resultado para 'toLocaleString()' em um objeto comum é: ");
+// var teste = obj.toLocaleString();
+// document.write("<strong>"+obj.toLocaleString()+"</strong><br />");
+// 
+// // Utilizando o método toLocaleString() em um objeto Date
+// var data = new Date();
+// document.write("O resultado para 'toLocaleString()' em um objeto Date é: ");
+// document.write("<strong>"+data.toLocaleString()+"</strong><br />");
+// 
+// // Utilizando o método toLocaleString() em um array
+// document.write("O resultado para 'toLocaleString()' em um array é: ");
+// var teste = new Array("TreinaWeb Cursos", data);
+// document.write("<strong>"+teste.toLocaleString()+"</strong><br />");
+
+// 
+
+var texto = "Treina Web cursos ";
+
+var palavra = new RegExp('Curso', 'i');
+
+if (texto.search(palavra !== -1 )) {
+	document.write("A palavra foi encontrada."+ palavra);
+	
+}else{
+	document.write("A palavra não foi encontrada");
+}
